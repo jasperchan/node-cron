@@ -193,15 +193,17 @@ export class CronJob<OC extends CronOnCompleteCommand | null = null, C = null> {
 		return this.cronTime.sendAt();
 	}
 
-	fireOnTick() {
-		for (const callback of this._callbacks) {
-			void callback.call(
-				this.context,
-				this.onComplete as WithOnComplete<OC> extends true
-					? CronOnCompleteCallback
-					: never
-			);
-		}
+	async fireOnTick() {
+		await Promise.all(
+			this._callbacks.map(callback =>
+				callback.call(
+					this.context,
+					this.onComplete as WithOnComplete<OC> extends true
+						? CronOnCompleteCallback
+						: never
+				)
+			)
+		);
 	}
 
 	nextDates(i?: number) {

@@ -22,7 +22,12 @@
 - execute a function whenever your scheduled job triggers
 - execute a job external to the javascript process (like a system command) using `child_process`
 - use a Date or Luxon DateTime object instead of cron syntax as the trigger for your callback
-- use an additional slot for seconds (leaving it off will default to 0 and match the Unix behavior)
+- use an additional slot for seconds (leaving it off will default to 0 and match
+  the Unix behavior)
+
+### Added In The Fork
+
+- allow `fireOnTick` to be awaited for manual triggers
 
 ## 🚀 Installation
 
