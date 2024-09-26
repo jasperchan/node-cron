@@ -17,6 +17,10 @@
 [![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/kelektiv/node-cron?label=openssf%20scorecard)](https://securityscorecards.dev/viewer/?uri=github.com/kelektiv/node-cron)
 [![Discord](https://img.shields.io/discord/1075597081017851934?logo=discord)](https://discord.gg/yyKns29zch)
 
+## Added In The Fork
+
+- allow `fireOnTick` to be awaited for manual triggers
+
 ## 🌟 Features
 
 - execute a function whenever your scheduled job triggers
@@ -24,10 +28,6 @@
 - use a Date or Luxon DateTime object instead of cron syntax as the trigger for your callback
 - use an additional slot for seconds (leaving it off will default to 0 and match
   the Unix behavior)
-
-### Added In The Fork
-
-- allow `fireOnTick` to be awaited for manual triggers
 
 ## 🚀 Installation
 
@@ -87,16 +87,16 @@ With the introduction of TypeScript in version 3 and alignment with UNIX cron pa
 ## 🛠 Basic Usage
 
 ```javascript
-import { CronJob } from 'cron';
+import { CronJob } from "cron";
 
 const job = new CronJob(
-	'* * * * * *', // cronTime
-	function () {
-		console.log('You will see this message every second');
-	}, // onTick
-	null, // onComplete
-	true, // start
-	'America/Los_Angeles' // timeZone
+  "* * * * * *", // cronTime
+  function () {
+    console.log("You will see this message every second");
+  }, // onTick
+  null, // onComplete
+  true, // start
+  "America/Los_Angeles" // timeZone
 );
 // job.start() is optional here because of the fourth parameter set to true.
 ```
@@ -104,12 +104,12 @@ const job = new CronJob(
 ```javascript
 // equivalent job using the "from" static method, providing parameters as an object
 const job = CronJob.from({
-	cronTime: '* * * * * *',
-	onTick: function () {
-		console.log('You will see this message every second');
-	},
-	start: true,
-	timeZone: 'America/Los_Angeles'
+  cronTime: "* * * * * *",
+  onTick: function () {
+    console.log("You will see this message every second");
+  },
+  start: true,
+  timeZone: "America/Los_Angeles",
 });
 ```
 
@@ -160,18 +160,18 @@ day of week    0-7 (0 or 7 is Sunday, or use names)
 - `sendAt`: Indicates when a `CronTime` will execute (returns a Luxon `DateTime` object).
 
   ```javascript
-  import * as cron from 'cron';
+  import * as cron from "cron";
 
-  const dt = cron.sendAt('0 0 * * *');
+  const dt = cron.sendAt("0 0 * * *");
   console.log(`The job would run at: ${dt.toISO()}`);
   ```
 
 - `timeout`: Indicates the number of milliseconds in the future at which a `CronTime` will execute (returns a number).
 
   ```javascript
-  import * as cron from 'cron';
+  import * as cron from "cron";
 
-  const timeout = cron.timeout('0 0 * * *');
+  const timeout = cron.timeout("0 0 * * *");
   console.log(`The job would run in ${timeout}ms`);
   ```
 
